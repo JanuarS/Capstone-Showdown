@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Showdown{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Springboard Capstone: Showdown App</h1>
+    <p>A web application for schools and organizations to compete against each other in various competitions and games--football, soccer, basketball, volleyball, dodgeball, film competition, 2D/3D artwork, photography, scrapbooking, etc. Judges and scorekeepers can enter the scores into the app and users can log in to view their schools’ standings. </p>
+</div>
+
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item">
+            <h3><a href="/user/new">Add new user</a></h3>
+        </li>
+        <li class="list-group-item">
+            <h3><a href="/school/new">Register your school</a></h3>
+        </li>
+        <li class="list-group-item">
+            <h3><a href="/school/registered">Registered schools</a></h3>
+        </li>
+        <li class="list-group-item">
+            <h3><a href="/user/registered">Registered users</a></h3>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Registered Users{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="display-1">Registered Users</h1>
+    <p>{{count}} total registrant</p>
+    <!-- Button trigger modal -->
+    <a href="" data-bs-toggle="modal" data-bs-target="#userFormModal">Register Now (modal)!</a>
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userFormModal">
+      Add User Form Model
+    </button> -->
+    <table class="table table-striped ">
+      <thead class="thead-dark">
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Gender</th>
+        <th>School</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.gender}}</td>
+            <td>{{user.school.school_name}}</td>
+            <td><a href="" class="edit-user" data-id="{{user.id}}">edit</a></td>
+            <td><a href="" class="delete-user" data-id="{{user.id}}">delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="/user/new" class="btn btn-success">Add User</a>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="userFormModal" tabindex="-1" aria-labelledby="userFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userFormModalLabel">Register for Showdown</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- User Form -->
+        <form method="POST">
+                {{ form.hidden_tag() }}
+                {% for field in form if field.widget.input_type != 'hidden' %}
+                    <div class="form-group">
+                        {{field.label}}
+                        {{field(class_="form-control")}}
+                        {% for err in field.errors %}
+                            <small class="form-text text-danger">
+                                {{err}}
+                            </small>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <!-- <button class="btn btn-secondary btn-lg">Submit</button> -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button class="btn btn-primary">Add User</button>
+                </div>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

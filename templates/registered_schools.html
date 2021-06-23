@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Registered Schools{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="display-1">Registered Schools</h1>
+    <p>{{total_count}} schools registered</p>
+    <table class="table table-striped ">
+      <thead class="thead-dark">
+        <th>School</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Registered Users</th>
+      </thead>
+      <tbody>
+        {% for school in schools %}
+        <tr>
+            <td>{{school.school_name}}</td>
+            <td>{{school.city}}</td>
+            <td>{{school.state}}</td>
+            <td>
+              <!-- {{user_count[loop.index - 1]}} -->
+              {{user_count}}
+            </td> <!-- user counter -->
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="/school/new" class="btn btn-success">Add School</a>
+</div>
+
+{% endblock %}
