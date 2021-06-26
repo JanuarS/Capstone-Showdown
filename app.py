@@ -50,7 +50,13 @@ def list_schools():
     # user_count = User.query.filter_by(school_code='unt').count()
     user_count = User.query.with_entities(User.school_code, func.count(User.school_code)).group_by(User.school_code).all()  # returns a list
 
-    return render_template('registered_schools.html', schools=schools, total_count=total_count, user_count=user_count)
+    registered_schools = db.session \
+        .query(School.school_code, School.school_name, School.city, School.state, func.count(User.id).label("total_students")) \
+        .join(User) \
+        .group_by(School.school_code, School.school_name, School.city, School.state) \
+        .all()
+
+    return render_template('registered_schools.html', schools=schools, total_count=total_count, user_count=user_count, registered_schools=registered_schools)
 
 @app.route('/user/new', methods=["GET", "POST"])
 def add_user():

@@ -15,14 +15,14 @@
         <th>Registered Users</th>
       </thead>
       <tbody>
-        {% for school in schools %}
+        {% for school in registered_schools %}
         <tr>
             <td>{{school.school_name}}</td>
             <td>{{school.city}}</td>
             <td>{{school.state}}</td>
             <td>
               <!-- {{user_count[loop.index - 1]}} -->
-              {{user_count}}
+              {{school.total_students}}
             </td> <!-- user counter -->
         </tr>
         {% endfor %}
