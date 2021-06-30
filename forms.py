@@ -33,6 +33,15 @@ class SchoolForm(FlaskForm):
     city = StringField("City")
     state = SelectField("State", choices=[(st, st) for st in states], validators=[InputRequired()])
 
+class KnowledgeBowlForm(FlaskForm):
+    """Form for adding Knowledge Bowl team"""
+
+    school_code = SelectField("School", choices=schools_list)
+    captain = SelectField("Captain") # choices=users_list (based on school)
+    player2 = SelectField("Player 2") # choices=users_list (based on school)
+    player3 = SelectField("Player 3") # choices=users_list (based on school)
+    player4 = SelectField("Player 4") # choices=users_list (based on school)
+    
 class LoginForm(FlaskForm):
     """Form for loging a user in"""
 

@@ -85,6 +85,24 @@ class User(db.Model):
             'password': self.password
         }
 
+class KnowledgeBowl(db.Model):
+    """Knowledge Bowl model"""
+
+    __tablename__ = "k_bowl"
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)    
+    comp_name = db.Column(db.Text)
+    school_code = db.Column(db.Text, db.ForeignKey('schools.school_code'))
+    captain = db.Column(db.Text, db.ForeignKey('users.id'))
+    player2 = db.Column(db.Text, db.ForeignKey('users.id'))
+    player3 = db.Column(db.Text, db.ForeignKey('users.id'))
+    player4 = db.Column(db.Text, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return f"<Knowledge Bowl {self.id} {self.comp_name} {self.school_code} {self.captain} {self.player2} {self.player3} {self.player4}>"
+
+
+
 # class Competiton(db.Model):
 #     """Competition model"""
 
