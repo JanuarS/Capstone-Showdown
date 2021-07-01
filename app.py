@@ -21,7 +21,8 @@ def home():
 
     return render_template('home_page.html')
 
-###### SCHOOL ROUTES ######
+
+########### SCHOOL ROUTES ###########
 
 @app.route('/school/new', methods=["GET", "POST"])
 def add_school():
@@ -70,9 +71,9 @@ def get_school(school_code):
     if form.validate_on_submit():
         school_code = form.school_code.data
         comp_name = form.comp_name.data
-        captain = form.captain.data
+        player = form.player.data
 
-        comp = Competition(school_code=school_code, comp_name=comp_name, captain=captain)
+        comp = Competition(school_code=school_code, comp_name=comp_name, player=player)
         db.session.add(comp)
         db.session.commit()
         return redirect("/school/{}".format(school_code))
@@ -80,24 +81,8 @@ def get_school(school_code):
     else:
         return render_template('show_school.html', school=school, form=form)
 
-# @app.route('/school/<string:school_code>', methods=["POST"])
-# def add_roster(school_code):
-#     """Add new competiton roster to competing school"""
 
-#     form = KnowledgeBowlForm()
-
-#     if form.validate_on_submit():
-#         school_code = form.school_code.data
-
-#         comp = KnowledgeBowl(school_code=school_code)
-#         db.session.add(comp)
-#         db.session.commit()
-#         return redirect("/school/registered")
-
-#     else:
-#         return render_template('show_school.html', form=form)
-
-###### USER ROUTES ######
+########### USER ROUTES ###########
 
 @app.route('/user/new', methods=["GET", "POST"])
 def add_user():

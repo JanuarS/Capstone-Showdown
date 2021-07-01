@@ -34,7 +34,7 @@ Basketball Table:
 - ID (primary key)
 - Competition name
 - Gender (Men’s/Women’s)
-- School code (foreign to schools table
+- School code (foreign to schools table)
 - Captain (foreign key to users table)
 - Player 2 (foreign key to users table)
 - Player 3 (foreign key to users table)
