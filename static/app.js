@@ -49,10 +49,9 @@ get('http://www.7timer.info/bin/api.pl?lon=-98.6189&lat=29.5827&product=civillig
     .then(res => {
         console.log(res.data.dataseries[0])    // Grabs today's weather   
         maxTemp = (res.data.dataseries[0].temp2m.max * 9/5) + 32;
-        console.log(maxTemp);
         minTemp = (res.data.dataseries[0].temp2m.min * 9/5) + 32;
-        console.log(minTemp);
         weather = res.data.dataseries[0].weather;
-        console.log(weather);    
+        let weatherInfo = document.querySelector('#weather')
+        weatherInfo.innerHTML = `Current weather in UTSA &#124; High: ${maxTemp}&#8457;, Low: ${minTemp}&#8457;, Weather: ${weather}`;
     })
     .catch(err => console.log(err))
