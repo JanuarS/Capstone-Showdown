@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}Add New School{% endblock %}
+{% block title %}{{school.school_name}}{% endblock %}
 
 {% block content %}
 
 <div class="container">
-    <h1 class="display-1 text-center">Add New School</h1>
+    <h1>{{school.school_name}}</h1>
+</div>
+
+<div class="container">
+    <h1 class="display-1 text-center">Add New Roster</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form method="POST">

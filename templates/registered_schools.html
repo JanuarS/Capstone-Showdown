@@ -17,13 +17,10 @@
       <tbody>
         {% for school in registered_schools %}
         <tr>
-            <td>{{school.school_name}}</td>
+            <td><a href="/school/{{school.school_code}}" class="show-school" data-id="{{school.school_code}}">{{school.school_name}}</a></td>
             <td>{{school.city}}</td>
             <td>{{school.state}}</td>
-            <td>
-              <!-- {{user_count[loop.index - 1]}} -->
-              {{school.total_students}}
-            </td> <!-- user counter -->
+            <td>{{school.total_students}}</td> <!-- user counter -->
         </tr>
         {% endfor %}
       </tbody>

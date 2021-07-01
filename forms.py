@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, BooleanField, RadioField, SelectField, PasswordField
 from wtforms.validators import InputRequired, Optional, Email
+from wtforms.widgets.core import Select
 
 states = ["TX", "AL", "AK", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WI", "WY"]
 
@@ -14,6 +15,16 @@ schools_list = [
     ('utep', 'University of Texas at El Paso'), 
     ('utrgv', 'University of Texas, Rio Grande Valley'), 
     ('utsa', 'University of Texas at San Antonio')]
+
+comps_list = [
+    ('m_soccer', "Men's Soccer"),
+    ('m_football', "Men's Football"),
+    ('m_basketball', "Men's Basketball"),
+    ('w_basketball', "Women's Basketball"),
+    ('w_volleyball', "Women's Volleyball"),
+    ('w_dodgeball', "Women's Dodgeball"),
+    ('k_bowl', 'Knowledge Bowl')
+]
 
 class UserForm(FlaskForm):
     """Form for adding/editing new users"""
@@ -33,15 +44,22 @@ class SchoolForm(FlaskForm):
     city = StringField("City")
     state = SelectField("State", choices=[(st, st) for st in states], validators=[InputRequired()])
 
-class KnowledgeBowlForm(FlaskForm):
-    """Form for adding Knowledge Bowl team"""
+# class KnowledgeBowlForm(FlaskForm):
+#     """Form for adding Knowledge Bowl team"""
+
+#     school_code = SelectField("School", choices=schools_list)
+#     captain = StringField("Captain") # choices=users_list (based on school)
+#     player2 = StringField("Player 2") # choices=users_list (based on school)
+#     player3 = StringField("Player 3") # choices=users_list (based on school)
+#     player4 = StringField("Player 4") # choices=users_list (based on school)
+    
+class CompetitionForm(FlaskForm):
+    """Form for adding new competition roster"""
 
     school_code = SelectField("School", choices=schools_list)
-    captain = SelectField("Captain") # choices=users_list (based on school)
-    player2 = SelectField("Player 2") # choices=users_list (based on school)
-    player3 = SelectField("Player 3") # choices=users_list (based on school)
-    player4 = SelectField("Player 4") # choices=users_list (based on school)
-    
+    comp_name = SelectField("Competition", choices=comps_list)
+    captain = StringField("Captain")
+
 class LoginForm(FlaskForm):
     """Form for loging a user in"""
 

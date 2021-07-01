@@ -1,4 +1,4 @@
-from models import School, User, db
+from models import School, User, Competition, db
 from app import app
 
 # Create all tables
@@ -7,7 +7,7 @@ db.create_all()
 
 School.query.delete()
 User.query.delete()
-# Competition.query.delete() --> import Competition from models
+Competition.query.delete()
 
 # Make a bunch of schools ()
 tamu = School(school_code="tamu", city="College Station", school_name="Texas A&M University")
@@ -81,15 +81,15 @@ wanda = User.register(first_name="Wanda", last_name="Maximoff", gender="Female",
 db.session.add_all([agatha, alistair, alphonso, andrew, bobbi, bruce, bucky, carol, cassandra, daisy, daniel, d_whitehall, darren, deke, elena, gideon, glenn, grant, henry, holden, hope, howard, james, jane, jasper, jemma, john, kamala, lance, leo, lincoln, lucy, maria, melinda, natasha, nathanial, nick, peggy, pepper, peter, phil, robbie, rosalind, ruby, samual, scott, sharon, stan, steve, sunil, tony, victoria, wanda])
 db.session.commit()
 
-# Make a bunch of competitions (men's soccer, men's football, men's/women's basketball, women's volleyball, women's dodgeball, spoken word)
-# m_soccer = Competiton(comp_name="Men's Soccer")
-# m_football = Competiton(comp_name="Men's Football")
-# m_basketball = Competiton(comp_name="Men's Basketball")
-# w_basketball = Competiton(comp_name="Women's Basketball")
-# w_volleyball = Competiton(comp_name="Women's Volleyball")
-# w_dodgeball = Competiton(comp_name"Women's Dodgeball")
+# Make a bunch of competition rosters (men's soccer, men's football, men's/women's basketball, women's volleyball, women's dodgeball, spoken word)
+tamu_m_soccer = Competition(school_code="tamu", comp_name="Men's Soccer", captain=2)
+# uh_m_football = Competition(comp_name="Men's Football")
+# uta_m_basketball = Competition(comp_name="Men's Basketball")
+# tamu_w_basketball = Competition(comp_name="Women's Basketball")
+# unt_w_volleyball = Competition(comp_name="Women's Volleyball")
+# uta_w_dodgeball = Competition(comp_name="Women's Dodgeball")
+# uta_k_bowl = Competition(comp_name="Knowledge Bowl")
 # spoken_word = Competiton(comp_name="Spoken Word")
-# k_bowl = Competition(comp_name="Knowledge Bowl")
 
-# db.session.add_all([m_soccer, m_football, m_basketball, w_basketball, w_volleyball, w_dodgeball, spoken_word, k_bowl])
-# db.session.commit()
+db.session.add_all([tamu_m_soccer])
+db.session.commit()

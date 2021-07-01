@@ -85,47 +85,41 @@ class User(db.Model):
             'password': self.password
         }
 
-class KnowledgeBowl(db.Model):
-    """Knowledge Bowl model"""
+# class KnowledgeBowl(db.Model):
+#     """Knowledge Bowl model"""
 
-    __tablename__ = "k_bowl"
+#     __tablename__ = "k_bowl"
 
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)    
-    comp_name = db.Column(db.Text)
-    school_code = db.Column(db.Text, db.ForeignKey('schools.school_code'))
-    captain = db.Column(db.Text, db.ForeignKey('users.id'))
-    player2 = db.Column(db.Text, db.ForeignKey('users.id'))
-    player3 = db.Column(db.Text, db.ForeignKey('users.id'))
-    player4 = db.Column(db.Text, db.ForeignKey('users.id'))
-
-    def __repr__(self):
-        return f"<Knowledge Bowl {self.id} {self.comp_name} {self.school_code} {self.captain} {self.player2} {self.player3} {self.player4}>"
-
-
-
-# class Competiton(db.Model):
-#     """Competition model"""
-
-#     __tablename__ = "competitions"
-
-#     id = db.Column(db.Integer)
+#     id = db.Column(db.Integer, autoincrement=True, primary_key=True)    
 #     comp_name = db.Column(db.Text)
-#     school_name = db.Column(db.Text)
-#     school_poc = db.Column(db.Integer)
-#     captain = db.Column(db.Integer)
-#     user2 = db.Column(db.Integer)
-#     user3 = db.Column(db.Integer)
+#     school_code = db.Column(db.Text, db.ForeignKey('schools.school_code'))
+#     captain = db.Column(db.Text, db.ForeignKey('users.id'))
+#     player2 = db.Column(db.Text, db.ForeignKey('users.id'))
+#     player3 = db.Column(db.Text, db.ForeignKey('users.id'))
+#     player4 = db.Column(db.Text, db.ForeignKey('users.id'))
 
 #     def __repr__(self):
-#         return f"<Competition {self.comp_name} {self.school_name} {self.school_poc} {self.captain}>"
+#         return f"<Knowledge Bowl {self.id} {self.comp_name} {self.school_code} {self.captain} {self.player2} {self.player3} {self.player4}>"
+
+class Competition(db.Model):
+    """Competition model"""
+
+    __tablename__ = "competitions"
+
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    school_code = db.Column(db.Text, db.ForeignKey('schools.school_code'))
+    comp_name = db.Column(db.Text)
+    captain = db.Column(db.Integer, db.ForeignKey('users.id'))
+    player = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return f"<Competition {self.school_code} {self.comp_name} {self.captain} {self.player}>"
     
-#     def serialize_competition(self):
-#         return {
-#             'id': self.id,
-#             'comp_name': self.comp_name,
-#             'school_name': self.school_name,  
-#             'school_poc': self.school_poc,  
-#             'captain': self.captain,  
-#             'user2': self.user2,  
-#             'user3': self.user3  
-#         }
+    def serialize_competition(self):
+        return {
+            'id': self.id,
+            'school_code': self.school_code,  
+            'comp_name': self.comp_name,
+            'captain': self.captain,  
+            'player': self.player
+        }

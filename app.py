@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, flash, session, jsonify
 # from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, School, User
-from forms import SchoolForm, UserForm, LoginForm
+from models import db, connect_db, School, User, Competition
+from forms import SchoolForm, UserForm, CompetitionForm, LoginForm
 from sqlalchemy import func
 
 app = Flask(__name__)
@@ -20,6 +20,8 @@ def home():
     """Shows home page"""
 
     return render_template('home_page.html')
+
+###### SCHOOL ROUTES ######
 
 @app.route('/school/new', methods=["GET", "POST"])
 def add_school():
@@ -47,8 +49,6 @@ def list_schools():
 
     schools = School.query.all()
     total_count = School.query.count()
-    # user_count = User.query.filter_by(school_code='unt').count()
-    user_count = User.query.with_entities(User.school_code, func.count(User.school_code)).group_by(User.school_code).all()  # returns a list
 
     registered_schools = db.session \
         .query(School.school_code, School.school_name, School.city, School.state, func.count(User.id).label("total_students")) \
@@ -56,7 +56,48 @@ def list_schools():
         .group_by(School.school_code, School.school_name, School.city, School.state) \
         .all()
 
-    return render_template('registered_schools.html', schools=schools, total_count=total_count, user_count=user_count, registered_schools=registered_schools)
+    return render_template('registered_schools.html', schools=schools, total_count=total_count, registered_schools=registered_schools)
+
+@app.route('/school/<string:school_code>', methods=["GET", "POST"])
+def get_school(school_code):
+    """Show information about one school"""
+
+    school = School.query.get_or_404(school_code)
+
+    # POST request
+    form = CompetitionForm()
+
+    if form.validate_on_submit():
+        school_code = form.school_code.data
+        comp_name = form.comp_name.data
+        captain = form.captain.data
+
+        comp = Competition(school_code=school_code, comp_name=comp_name, captain=captain)
+        db.session.add(comp)
+        db.session.commit()
+        return redirect("/school/{}".format(school_code))
+
+    else:
+        return render_template('show_school.html', school=school, form=form)
+
+# @app.route('/school/<string:school_code>', methods=["POST"])
+# def add_roster(school_code):
+#     """Add new competiton roster to competing school"""
+
+#     form = KnowledgeBowlForm()
+
+#     if form.validate_on_submit():
+#         school_code = form.school_code.data
+
+#         comp = KnowledgeBowl(school_code=school_code)
+#         db.session.add(comp)
+#         db.session.commit()
+#         return redirect("/school/registered")
+
+#     else:
+#         return render_template('show_school.html', form=form)
+
+###### USER ROUTES ######
 
 @app.route('/user/new', methods=["GET", "POST"])
 def add_user():
@@ -125,9 +166,12 @@ def add_user_on_list():
     else:
         return render_template('add_user_form.html', form=form)
 
-@app.route('/user/<int:id>', methods=["PATCH"])
-def edit_user(id):
+@app.route('/user/<int:id>')
+def show_user(id):
+    """Show user profile"""
+
     user = User.query.get_or_404(id)
+    
     # PREPOPULATE FORM WITH EXISTING DATA
     # EDIT THE FORM
     # db.session. (user)
