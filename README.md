@@ -1,5 +1,11 @@
 <h1 align="center">Showdown App</h1>
 
-A web application for schools and organizations to compete against each other in various competitions and games--football, soccer, basketball, volleyball, dodgeball, film competition, 2D/3D artwork, photography, scrapbooking, etc. Judges and scorekeepers can enter the scores into the app and users can log in to view their schools’ standings.
+A web application for schools and organizations to organize their team rosters for various competitions and games--football, soccer, basketball, volleyball, dodgeball, and knowledge bowl.
+
+Schools are able to register their schools and submit rosters based on their desired competition. Users are also able to register and display their names on a universal list so that others can see who is registered for Showdown. 
+
+HTML, Bootstrap, and JavaScript are used for the front-end while Python is mostly use for the back-end. Bcrypt was used to authenticate users. The 7timer weather api was used to get local weather information at the the host school, UTSA. 
 
 \- A Springboard Capstone Project -
+
+
