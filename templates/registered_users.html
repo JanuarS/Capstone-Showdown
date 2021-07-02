@@ -28,7 +28,7 @@
             <td>{{user.last_name}}</td>
             <td>{{user.gender}}</td>
             <td>{{user.school.school_name}}</td>
-            <td><a href="" class="edit-user" data-id="{{user.id}}">edit</a></td>
+            <td><a href="/user/{{user.id}}" class="show-user" data-id="{{user.id}}">edit</a></td>
             <td><a href="" class="delete-user" data-id="{{user.id}}">delete</a></td>
         </tr>
         {% endfor %}
@@ -64,7 +64,7 @@
                 <!-- <button class="btn btn-secondary btn-lg">Submit</button> -->
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                  <button class="btn btn-primary">Add User</button>
+                  <button class="btn btn-primary">Register</button>
                 </div>
             </form>
       </div>

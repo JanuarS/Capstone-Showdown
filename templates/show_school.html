@@ -5,11 +5,13 @@
 {% block content %}
 
 <div class="container">
-    <h1>{{school.school_name}}</h1>
+    <h1 class="display-2 text-center">{{school.school_name}}</h1>
 </div>
 
+
+
 <div class="container">
-    <h1 class="display-1 text-center">Add New Roster</h1>
+    <h3 class="display-3 text-center">Add New Roster</h3>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form method="POST">
@@ -23,7 +25,7 @@
                         {% endfor %}
                     </div>
                 {% endfor %}
-                <button class="btn btn-secondary btn-lg">Submit</button>
+                <button class="btn btn-secondary btn-md mt-2">Submit</button>
             </form>
         </div>
     </div>

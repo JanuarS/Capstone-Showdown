@@ -1,8 +1,10 @@
-from flask import Flask, request, render_template, redirect, flash, session, jsonify
+from flask import Flask, request, render_template, redirect, flash, session, jsonify, g
 # from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, School, User, Competition
 from forms import SchoolForm, UserForm, CompetitionForm, LoginForm
 from sqlalchemy import func
+
+CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
 
@@ -14,6 +16,29 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 # debug = DebugToolbarExtension(app)
 
 connect_db(app)
+
+########## Login/Logout #########
+@app.before_request
+def add_user_to_g():
+    """If we're logged in, add curr user to Flask global."""
+
+    if CURR_USER_KEY in session:
+        g.user = User.query.get(session[CURR_USER_KEY])
+
+    else:
+        g.user = None
+
+def do_login(user):
+    """Log in user."""
+
+    session[CURR_USER_KEY] = user.id
+
+def do_logout():
+    """Logout user."""
+
+    if CURR_USER_KEY in session:
+        del session[CURR_USER_KEY]
+
 
 @app.route('/')
 def home():
@@ -162,6 +187,8 @@ def show_user(id):
     # db.session. (user)
     # db.session.commit()
 
+    return render_template('show_user.html', user=user)
+
 @app.route('/user/<int:id>', methods=["DELETE"])
 def delete_user(id):
     user = User.query.get_or_404(id)
@@ -180,17 +207,33 @@ def login_user():
         user = User.authenticate(email, password)
 
         if user:
-            flash(f"Welcome Back, {user.email}!", "primary")
-            session['user_id'] = user.id
+            do_login(user)
+            flash(f"Welcome Back, {user.first_name}!", "primary")
+            # session['user_id'] = user.id
             return redirect('/')
         else:
             form.email.errors = ["Invalid email/password"]
 
     return render_template('login.html', form=form)
 
+@app.route('/user/logout', methods=["POST"])
+def logout_user():
+    """Logout user."""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/")
+
+    do_logout()
+
+    db.session.delete(g.user)
+    db.session.commit()
+
+    return redirect("/")
+
 @app.route('/secret')
 def secret():
-    """Test Logins"""
+    """Test Log in."""
 
     return render_template('secret.html')
 

@@ -33,7 +33,7 @@ class UserForm(FlaskForm):
     last_name = StringField("Last Name")
     gender = RadioField("Gender", choices=[('Male', 'Male'), ('Female', 'Female')], validators=[InputRequired()])
     school_code = SelectField("School", choices=schools_list)
-    email = StringField("Email Address (Used to login)", validators=[InputRequired(), Email()])
+    email = StringField("Email Address", validators=[InputRequired(), Email()])
     password = PasswordField("Password", validators=[InputRequired()])
 
 class SchoolForm(FlaskForm):

@@ -60,7 +60,9 @@ $colors: (
 // scss-docs-end colors-map
 
 // scss-docs-start theme-color-variables
-$primary:       $blue !default;
+$navbar:        rgba(2, 64, 137, 1);
+$navlink:       rgba(250, 132, 26, 1);
+$primary:       rgba(0, 77, 169, 1);
 $secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;
@@ -72,6 +74,8 @@ $dark:          $gray-900 !default;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
+  "navbar":     $navbar,
+  "navlink":    $navlink,
   "primary":    $primary,
   "secondary":  $secondary,
   "success":    $success,
@@ -83,10 +87,16 @@ $theme-colors: (
 ) !default;
 // scss-docs-end theme-colors-map
 
-$font-family-base:            "Caudex";
-$font-family-code:            "Caudex";
-h1,h2,h3,h4,h5,h6 {
-    font-family: "Corben";
+$font-family-base:            "Work Sans";
+$font-family-code:            "Work Sans";
+h1 {
+    font-family: "Inter";
+    font-weight: 500;
+}
+
+h2,h3,h4,h5,h6 {
+    font-family: "Inter";
+    font-weight: 400;
 }
 
 ul {
@@ -94,6 +104,7 @@ ul {
 }
 
 
-@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Corben:wght@400;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&family=Corben:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Work+Sans&display=swap');
 // @import url('https://fonts.googleapis.com/css2?family=Corben&display=swap');
 @import "node_modules/bootstrap/scss/bootstrap";

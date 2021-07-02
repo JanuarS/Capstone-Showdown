@@ -10,7 +10,7 @@
     </head>
 
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-navbar">
             <a class="navbar-brand" href="/">
                 <img src="https://static.wixstatic.com/media/d951bc_22f3086f5b3240558ff71b4cb8cff512~mv2_d_2001_2001_s_2.png/v1/fill/w_138,h_138,al_c,q_85,usm_0.66_1.00_0.01/LSC.webp" width="30" height="30" class="d-inline-block align-top" alt="logo"> Showdown
             </a>
@@ -19,20 +19,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navigation">
                 <div class="navbar-nav">
-                    <a href="/" class="nav-item nav-link">Home</a>
-                    <a href="/user/new" class="nav-item nav-link" >Add User</a>
-                    <a href="/school/new" class="nav-item nav-link">Add School</a>
-                    <a href="/school/registered" class="nav-item nav-link">Registered School</a>
-                    <a href="/user/registered" class="nav-item nav-link">Registered Users</a>
+                    <a href="/" class="nav-item nav-link text-navlink">Home</a>
+                    <a href="/user/new" class="nav-item nav-link text-navlink" >Add User</a>
+                    <a href="/school/new" class="nav-item nav-link text-navlink">Add School</a>
+                    <a href="/school/registered" class="nav-item nav-link text-navlink">Registered School</a>
+                    <a href="/user/registered" class="nav-item nav-link text-navlink">Registered Users</a>
+                    <div class="float-right">
+                        <button class="btn btn-success my-2 my-sm-0">
+                            <a href="/login" class="text-white">Sign In</a>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <button class="btn btn-success my-2 my-sm-0 float-right">
-                <a href="/login" class="text-white">Sign In</a>
-            </button>   <!-- Fix this button -->
+            
         </nav>
 
         <!-- Weather Information from API -->
-        <p id="weather"></p>
+        <p id="weather">Current weather in UTSA |</p>
         
     </header>
 
