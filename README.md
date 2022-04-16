@@ -8,4 +8,14 @@ HTML, Bootstrap, and JavaScript are used for the front-end while Python is mostl
 
 \- A Springboard Capstone Project -
 
+To run
+Create a virtual environment 
 
+$ python3 -m venv venv
+$ source venv/bin/activate
+
+Install packages
+
+(venv) $ pip install -r requirements.txt
+
+(venv) $ flask run
